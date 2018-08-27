@@ -1,0 +1,18 @@
+/*创建一个Person的类*/
+class Person{
+	String name;
+	int age;
+	Person(String personName,int personAge){
+		name=personName;
+		age=personAge;
+	}
+	Person(){}/*如果没有这个的话，之后就不能用Person person1=new Person()*/
+}
+
+
+class Test{
+	public static void main(String args[]){
+		Person person1=new Person("len",25); /*便于初始化*/
+		System.out.println("person1's name is "+person1.name+".");
+	}
+}
