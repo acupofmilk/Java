@@ -1,0 +1,33 @@
+/*内部类：在一个类里面，再生产一个类；*/
+class A{
+	int i;
+	class B{
+		int j;
+		int funB(){
+			int result = i + j;//内部类没有继承外部类；内部类能够使用外部类的所有变量和方法；
+			//因为内部类是由外部类定义的；
+			return result;
+		}
+	}
+}
+//生成A.class 和 A$B.class
+//在B类中准确调用A的元素i，应该是A.this.i;B类的this是B类的；
+//所以应该是 int result = A.this.i + this.j;
+
+
+//匿名内部类：没有名字的内部类
+//匿名内部类：一般是new 接口名(){实现接口的代码}--将其作为能够调用的类的对象；
+
+
+//运用内部类
+class Test{
+	public static void main(String args []){
+		A a = new A();
+		A.B b = a.new B();//内部类对象的生成方法，先生成一个外部类对象；
+		/*或者A.B b = new A().new B();*/
+		a.i=12;
+		b.j=23;
+		int result = b.funB();
+		System.out.println(result);
+	}
+}
