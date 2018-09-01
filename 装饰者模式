@@ -1,0 +1,63 @@
+用法：
+装饰者和被装饰者共有一个超类Car();
+
+
+//超类Car
+interface Car{
+	public void run();
+}
+
+
+//Car的一个子类Volvo
+class Volvo implements Car{
+	public void run(){
+		System.out.println("Volvo can run");
+	}
+}
+
+
+//Car的另外一个子类Benz.
+class Benz implements Car{
+	public void run(){
+		System.out.println("Benz can run");
+	}
+}
+
+
+//要添加的修饰功能：播放音乐。
+class MusicDecorator implements Car{
+	private Car car; //共超类的对象；
+	public MusicDecorator(Car car){
+		this.car = car;
+	}
+	public void run(){
+		car.run();
+		System.out.println("also can play music.");//添加功能；
+	}
+}
+
+
+//要添加的修饰功能：播放收音机。
+class RadioDecorator implements Car{
+	private Car car;
+	public RadioDecorator(Car car){
+		this.car = car;
+	}
+	public void run(){
+		car.run();
+		System.out.println("also can play radio.");
+	}
+}
+
+
+//要添加的修饰功能：播放收音机。
+class RadioDecorator implements Car{
+	private Car car;
+	public RadioDecorator(Car car){
+		this.car = car;
+	}
+	public void run(){
+		car.run();
+		System.out.println("also can play radio.");
+	}
+}
