@@ -1,0 +1,24 @@
+//定义一个线程类；
+class FirstThread extends Thread{
+	public void run(){
+		for(int i = 0;i < 100;i++){
+			System.out.println("FirstThread-->" + i);
+		}
+	}
+}
+
+
+class Test{
+	public static void main(String args[]){
+		FirstThread ft = new FirstThread();//ft代表了一个线程；
+		ft.start();//ft从Thread类继承来的，表示启动线程，进入就绪状态（不代表马上执行，还要抢CPU）；
+		//抢到CPU后，执行run()当中的代码；
+		//ft.run():没有启动线程，只是代表在main()这个单一线程中，执行run()方法；
+		for(int j = 0;j<100;j++){
+			System.out.println("main-->"+j);
+		}
+	}
+}
+//i循环与j循环处于不同线程，main()线程运行到ft.start()后，线程ft处于就绪状态，然后
+//返回main()线程，执行j循环几次，然后ft.start()抢到CPU，执行i循环；
+//此时有三个线程：1、主函数main();2、启动的ft.start()；3、垃圾回收线程；
