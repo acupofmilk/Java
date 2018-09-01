@@ -1,3 +1,5 @@
+//方法一：使用继承Thread;
+
 //定义一个线程类；
 class FirstThread extends Thread{
 	public void run(){
@@ -22,3 +24,35 @@ class Test{
 //i循环与j循环处于不同线程，main()线程运行到ft.start()后，线程ft处于就绪状态，然后
 //返回main()线程，执行j循环几次，然后ft.start()抢到CPU，执行i循环；
 //此时有三个线程：1、主函数main();2、启动的ft.start()；3、垃圾回收线程；
+
+
+
+
+//方法二：使用接口Runnable;
+
+//创造一个Runnable接口实现类的类RunnableImpl;
+class RunnableImpl implements Runnable{
+	//Runnable只有一个方法run();
+	public void run(){
+		for(int i = 0;i<100;i++){
+			System.out.println("Runnable-->"+ i);
+		}
+	}
+}
+
+
+class TestRun{
+	public static void main(String args[]){
+		//生成一个Runnable接口实现类的对象ri；
+		RunnableImpl ri = new RunnableImpl();
+		//生成一个Thread对象，并将Runnable接口实现类对象ri作为参数
+		//传递给Thread的构造函数；
+		Thread t = new Thread(ri);
+		//Thread对象启动start；
+		t.start();
+	}
+}
+
+//两者比较，一般使用第二居多；因为：
+1、继承只能单继承，一般不用；
+2、接口的线程体r1和线程t分开了；而继承的ft既代表线程体，又代表线程；
