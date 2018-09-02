@@ -1,0 +1,58 @@
+//需操作的程序Func;
+class Func{
+	public void func1(){
+		synchronized(this){ //同步锁锁住的this代表的调用Func类的对象；
+			try{
+				Thread.sleep(3*1000);
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+			System.out.println("func1");
+		}
+	}
+	
+	public void func2(){
+		synchronized(this){
+			System.out.println("func2");
+		}
+		
+	}
+}
+
+//定义第一个线程体，调用Func.func1();
+class MyThread1 implements Runnable{
+	private Func func;
+	public MyThread1(Func func){
+		this.func = func;
+	}
+	
+	public void run(){
+		func.func1();
+	}
+}
+
+//定义第二个线程体，调用Func.func2();
+class MyThread2 implements Runnable{
+	private Func func;
+	public MyThread2(Func func){
+		this.func = func;
+	}
+	
+	public void run(){
+		func.func2();
+	}
+}
+
+
+class Test{
+	public static void main(String args[]){
+		Func func = new Func(); 
+		Thread tr1 = new Thread(new MyThread1(func));
+		Thread tr2 = new Thread(new MyThread2(func));
+		//tr1和tr2的run调用的是同一个对象，所以有同步锁时，线程在tr1内不会调到tr2；
+		tr1.start();
+		//System.out.println("Wait");
+		tr2.start();
+	}
+}
