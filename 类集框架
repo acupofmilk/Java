@@ -1,0 +1,45 @@
+//Set
+
+import java.util.Set;//Collection的子接口
+import java.util.HashSet;//util.Set的实现类
+import java.util.Iterator;
+
+public class Test{
+	public static void main(String args []){
+		HashSet<String> hashSet = new HashSet<String>();
+		Set<String> set = hashSet;//一般都要向上转型，因为其他类一般引用Set类；
+		//Set<String> set = new HashSet<String>();
+		set.add("ab");
+		set.add("cd");
+		set.add("ef");
+		set.add("g");
+		set.add("h");
+		
+		Iterator<String> it = set.iterator();//生成一个迭代器对象it；用于遍历整个set；
+		//注意Iterator<set元素的类> it =
+		while(it.hasNext()){
+			String s = it.next();
+			System.out.println(s);
+		}
+		
+	}
+}
+
+//HashMap
+
+import java.util.Map;//Collection的子接口
+import java.util.HashMap;//util.Set的实现类
+
+public class Test{
+	public static void main(String args []){
+		HashMap<String,String> hashMap = new HashMap<String,String>();
+		Map<String,String> map = hashMap;
+		
+		map.put("1","a");
+		map.put("2","b");
+		map.put("3","c");
+		map.put("3","d");//覆盖掉3->c
+		
+		map.get("3");
+	}
+}
